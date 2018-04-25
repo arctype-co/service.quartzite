@@ -22,7 +22,7 @@
 
   (stop [this]
     (log/debug {:message "Stopping Quartzite service"})
-    (-> scheduler qs/standby qs/shutdown)
+    (doto scheduler qs/standby qs/shutdown)
     this))
 
 (S/defn create
