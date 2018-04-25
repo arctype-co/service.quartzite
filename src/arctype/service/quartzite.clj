@@ -16,10 +16,12 @@
 (defrecord Quartzite [config scheduler]
   PLifecycle
   (start [this]
-    (update this :scheduler qs/start))
+    (-> this
+        (update :scheduler qs/start)))
 
   (stop [this]
-    (-> scheduler qs/standby qs/shutdown)))
+    (-> scheduler qs/standby qs/shutdown)
+    this))
 
 (S/defn create
   [resource-name
