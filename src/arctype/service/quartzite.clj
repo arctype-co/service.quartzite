@@ -16,10 +16,12 @@
 (defrecord Quartzite [config scheduler]
   PLifecycle
   (start [this]
+    (log/debug {:message "Starting Quartzite service"})
     (-> this
         (update :scheduler qs/start)))
 
   (stop [this]
+    (log/debug {:message "Stopping Quartzite service"})
     (-> scheduler qs/standby qs/shutdown)
     this))
 
